@@ -1,0 +1,55 @@
+---
+title: 'Linear Algebra for Quantum I'
+date: '2026-06-10'
+tags: ['quantum computing', 'linear algebra']
+draft: false
+summary: 'vectors, vector spaces and basis in linear algebra and its use in quantum computing'
+---
+
+# Introduction
+Welcome to my first blog, it may seem intimidating at first, but you will get it by the end. So, we will be focusing on linear algebra for quantum computing. As, the title suggests, we will study Linear Algebra with the perspective of its use in quantum computing. Although I have tried to keep it very simple, but I still would assume, familiarity with high school linear algebra and of course high school mathematics, I will try to cover only some important stuff here.
+
+# Vector spaces and vectors
+Well, I assume that you have seen vectors, before this in some form. I come from a mathematical background, and so the perspective would also be mathematical. Now, in classical computing information is coded in bits which can be 0 or 1. But, in quantum setting things change, and the analogue is qubit. Now, one might with his naive intuition, and his own sense of quantum computing, see a qubit as something between 0 and 1 but this idea fails terribly. The real way to think of it is, in some way representing both 0 and 1, which paves way for vectors.
+
+
+----
+
+Vectors are elements of spaces called vector spaces (spaces can be understood as sets for this blogpost). Vector space over a "field" is actually a set which is closed under "addition" and "scalar multiplication". Now, the first one presumes a notion of "addition", which is something we would know in almost all of the useful cases, by our experience, the latter one presumes a notion of "multiplication" that too with a "scalar", the scalar is actually the element of a "field" over which the vector space is defined. For our purpose, this "field" is actually mostly complex numbers and sometimes reals. So, there is a notion of mulitplication with complex numbers and there is a notion of adding vectors. 
+
+Before we move ahead, I need to clarify due to the abstract nature of mathematics, vector spaces for our use would appear in very different forms, across our journey! But, the above definition would be sufficient to deal with it. (or i hope so, nevertheless if not I would make necessary changes)
+
+---
+
+# Linear Transformations or operators
+
+Well, with objects in hand mathematicians are always interested in how to relate different objects and maps always do that job. For those of you, who need its use in quantum computing rather than being interested in these objects themselves, linear operators do have an important use case and that i such that it can be understood on a basic level.
+
+In classical computing, you have gates, which are used to modify information the way we want. Well there is again a quantum analogue of it, and we call them quantum gates. Surprisingly they act as what we call linear transformation. Now, before we move to the definition of this object. I would like you to induct this fact in your head that in mathematics, we often use the term "homomorphism" after an object. The term "homomorphism" actually signifies that the properties of the object are respected while going through the map. A linear transformation is actually a vector space homomorphism, which means that if a map satisfies the following properties,  image of sum of vectors is actually the same as image of sum of the vectors and image of vector multiplied with a scalar is same as the scalar multiplication of image of the vector with the same scalar, then the map is a linear transformation. That was too bad to understand and hence I have written that down in equations 
+
+A map $F: V \rightarrow W$ where $V$ and $W$ are vector spaces over a field $\mathbb{F}$ is called a linear transformation if, 
+1. $\forall v \in V, w \in W, F(v+w) = F(v) + F(w)$ 
+2. $\forall c \in \mathbb{F}, v \in V, F(c v) = c F(v)$ 
+
+Notice, that we needed both the spaces to be under the same field, this is the only reason why the last property makes sense and is needed if we go by the name *vector space homomorphism* of *linear transformation*.
+
+---
+
+# Basis and dimension of a vector space
+
+This is one of the most interesting parts of linear algebra, and it is the part that really brings matrices into the picture.
+
+By definition, *basis* is any subset of vector space, which "spans" the vector space and is "linearly independent". Now, we will tackle both the terms and with ease. Without being too descriptive, I will directly list the two conditions, in another definition.
+
+A subset $\mathcal{B} \subset V$ is a basis of a vector space $V$ over a field $\mathbb{F}$ if and only if:
+1. $\forall v \in V, v = \sum_{\beta \in \mathcal{B}} c_\beta \beta$ where $c_\beta \in \mathbb{F}$
+2. $\not \exists \{c_\beta\}_{\beta \in \mathcal{B}} \subset \mathbb{F}^{|\mathcal{B}|}$ s.t. some $c_\beta \neq 0$ and $\sum_\beta c_\beta \beta = 0$
+
+The first condition corresponds to the phrase "spans the vector space" while the latter corresponds to "linear independence". Now, in most of the cases we will deal with $|\mathcal{B}|$ being finite, but this still may not be always true and we have a special name for the cardinality, which is *dimension of vector space*.
+
+This itself would raise doubts as to how can be dimension same, we will provide a proof for the finite case, just here.
+
+Although I should be rigorous about it, but its always better to try the details on your own, so here is a sketch of the proof, suppose we have two basis of cardinality $m$ and $n$, where $m < n$, then say the basis are $\beta_m$ and $\beta_n$ with cardinality $m$ and $n$ respectively. The strategy is to reduce the size of $\beta_n$ by arguing that there is a subset of $\beta_n$ which also works as a basis. Now, the way to do it, is that we can add an element of $\beta_n$ to $\beta_m$ and then argue that the resulting set is not linearly independent, after which we remove one element from it and argue that it is a suitable basis, we keep reapeating the process, replacing elements of $\beta_m$ with that of $\beta_n$ and when all the elements are of $\beta_n$ we are done as we have proved our claim, and this disproves linear independence of $\beta_n$.
+
+Now, coming to the real point whats the actual use of basis. In context of quantum computing and even in our association with vectors in high school, we generally deal with 2 dimensional spaces. In context of qubits the standard basis is $\{|0 \rangle , |1 \rangle \}$
+
